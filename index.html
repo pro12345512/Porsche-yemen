@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بورش اليمن | الروح الفائقة</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="اكتشف عالم بورش، حيث يلتقي الأداء بالتصمييم. استكشف طرازات 911، تايكان، وكايين في تجربة قيادة لا مثيل لها.">
+  <meta name="keywords" content="بورش, سيارات رياضية, 911, تايكان, سيارات كهربائية, بورش اليمن">
+</head>
+
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header id="header">
+      <div class="container nav">
+        <div class="logo">
+          <a href="#"><img src="/assets/logo.png" alt="بورش"></a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#models">الطرازات</a></li>
+          <li><a href="#tech">الابتكار</a></li>
+          <li><a href="#experience">التجربة</a></li>
+          <li><a href="#shop">المتجر</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="#" class="btn-small glass">تواصل معنا</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero active">
+        <div class="hero-bg" style="background-image: url('/assets/hero.png');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <h1>روح الأداء</h1>
+          <p>عندما يلتقي التصميم الخالد بالقوة الجامحة، تولد الأسطورة.</p>
+          <div class="hero-btns">
+            <a href="#models" class="btn btn-primary">اكتشف الطرازات</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Models Showcase -->
+      <section id="models" class="section-padding container">
+        <div class="section-title reveal">
+          <h2>طرازاتنا</h2>
+          <p>اختر الأسطورة التي تناسبك</p>
+        </div>
+        <div class="models-grid">
+          <div class="model-card reveal">
+            <div class="model-img" style="background-image: url('/assets/taycan.png');"></div>
+            <div class="model-info">
+              <span>الكهرباء بروح رياضية</span>
+              <h3>تايكان (Taycan)</h3>
+            </div>
+          </div>
+          <div class="model-card reveal">
+            <div class="model-img" style="background-image: url('/assets/cayenne.png');"></div>
+            <div class="model-info">
+              <span>الفخامة والقوة</span>
+              <h3>كايين (Cayenne)</h3>
+            </div>
+          </div>
+          <div class="model-card reveal">
+            <div class="model-img" style="background-image: url('/assets/hero.png');"></div>
+            <div class="model-info">
+              <span>أيقونة خالدة</span>
+              <h3>911 GT3 RS</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Innovation Section -->
+      <section id="tech" class="features section-padding">
+        <div class="container">
+          <div class="feature-item reveal">
+            <div class="feature-text">
+              <h2>الأداء الكهربائي</h2>
+              <p>نحن لا نصنع سيارات كهربائية فحسب، بل نصنع بورش. تقنيات شحن فائقة السرعة ومدى قيادة مذهل مع الحفاظ على
+                الأداء الرياضي المعروف عن بورش.</p>
+              <a href="#" class="btn">اعرف المزيد</a>
+            </div>
+            <div class="feature-img" style="background-image: url('/assets/taycan.png');"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience & Configurator Section -->
+      <section id="experience" class="section-padding container">
+        <div class="section-title reveal">
+          <h2>استوديو بورش للتخصيص</h2>
+          <p>صمم سيارة أحلامك واحجز تجربة قيادة حية في شوارع اليمن</p>
+        </div>
+
+        <div class="configurator-wrapper reveal">
+          <!-- Car Preview Frame -->
+          <div class="config-preview">
+            <div class="car-glowing-auras"></div>
+            <!-- Car Image wrapper to apply filters and options -->
+            <div class="car-image-container">
+              <img id="custom-car-image" src="/assets/taycan.png" alt="Porsche Taycan">
+              <!-- Glow Headlights elements -->
+              <div class="headlight-glow left-headlight"></div>
+              <div class="headlight-glow right-headlight"></div>
+              <!-- Custom Spoiler mockup -->
+              <div id="spoiler-overlay" class="spoiler-overlay hide"></div>
+            </div>
+
+            <!-- Specs HUD -->
+            <div class="specs-hud">
+              <div class="spec-item">
+                <span class="spec-val" id="spec-accel">2.8ث</span>
+                <span class="spec-lbl">تسارع (0-100 كم/س)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-val" id="spec-speed">260 كم/س</span>
+                <span class="spec-lbl">السرعة القصوى</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-val" id="spec-power">761 حصان</span>
+                <span class="spec-lbl">القوة الحصانية</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Configuration Controls -->
+          <div class="config-controls glass">
+            <h3>خيارات التخصيص</h3>
+
+            <!-- Step 1: Model Selection -->
+            <div class="config-group">
+              <label>اختر طراز السيارة</label>
+              <div class="model-select-group">
+                <button class="model-btn active" data-model="taycan" data-accel="2.8ث" data-speed="260 كم/س"
+                  data-power="761 حصان" data-base-price="150000" data-img="/assets/taycan.png">تايكان
+                  الكهربائية</button>
+                <button class="model-btn" data-model="cayenne" data-accel="3.3ث" data-speed="300 كم/س"
+                  data-power="659 حصان" data-base-price="130000" data-img="/assets/cayenne.png">كايين الفاخرة</button>
+                <button class="model-btn" data-model="911" data-accel="3.2ث" data-speed="312 كم/س" data-power="525 حصان"
+                  data-base-price="220000" data-img="/assets/hero.png">911 GT3 RS الأسطورية</button>
+              </div>
+            </div>
+
+
+            <!-- Step 3: Wheels Selection -->
+            <div class="config-group">
+              <label>الإطارات والجنوط</label>
+              <div class="wheels-select-visual">
+                <div class="wheel-option-card active" data-wheel-style="classic" data-wheel-price="0">
+                  <div class="wheel-visual-preview">
+                    <div class="wheel-rim classic-rim">
+                      <div class="wheel-center"></div>
+                      <div class="spoke s1"></div><div class="spoke s2"></div>
+                      <div class="spoke s3"></div><div class="spoke s4"></div>
+                      <div class="spoke s5"></div>
+                    </div>
+                  </div>
+                  <div class="wheel-info">
+                    <span class="wheel-name">Sport Classic</span>
+                    <span class="wheel-size">20 إنش</span>
+                    <span class="wheel-price-tag">مجاناً</span>
+                  </div>
+                </div>
+                <div class="wheel-option-card" data-wheel-style="spyder" data-wheel-price="3500">
+                  <div class="wheel-visual-preview">
+                    <div class="wheel-rim spyder-rim">
+                      <div class="wheel-center"></div>
+                      <div class="spoke s1"></div><div class="spoke s2"></div>
+                      <div class="spoke s3"></div><div class="spoke s4"></div>
+                    </div>
+                  </div>
+                  <div class="wheel-info">
+                    <span class="wheel-name">RS Spyder Design</span>
+                    <span class="wheel-size">21 إنش</span>
+                    <span class="wheel-price-tag">+ $3,500</span>
+                  </div>
+                </div>
+                <div class="wheel-option-card" data-wheel-style="exclusive" data-wheel-price="5000">
+                  <div class="wheel-visual-preview">
+                    <div class="wheel-rim exclusive-rim">
+                      <div class="wheel-center"></div>
+                      <div class="spoke s1"></div><div class="spoke s2"></div>
+                      <div class="spoke s3"></div><div class="spoke s4"></div>
+                      <div class="spoke s5"></div><div class="spoke s6"></div>
+                    </div>
+                  </div>
+                  <div class="wheel-info">
+                    <span class="wheel-name">Mission E Exclusive</span>
+                    <span class="wheel-size">21 إنش</span>
+                    <span class="wheel-price-tag premium-price">+ $5,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: Addons & Upgrades -->
+            <div class="config-group">
+              <label>إضافات تكنولوجية ورياضية</label>
+              <div class="addon-cards">
+                <label class="addon-card" id="addon-headlights-label">
+                  <input type="checkbox" id="toggle-headlights">
+                  <div class="addon-card-inner">
+                    <div class="addon-icon-wrap">
+                      <div class="drl-icon">
+                        <div class="drl-bar drl-bar-1"></div>
+                        <div class="drl-bar drl-bar-2"></div>
+                        <div class="drl-bar drl-bar-3"></div>
+                      </div>
+                    </div>
+                    <div class="addon-text">
+                      <span class="addon-name">مصابيح نهارية LED Matrix</span>
+                      <span class="addon-desc">DRL Daytime Running Lights</span>
+                    </div>
+                    <div class="addon-check">✓</div>
+                  </div>
+                </label>
+                <label class="addon-card" id="addon-spoiler-label">
+                  <input type="checkbox" id="toggle-spoiler" data-spoiler-price="4500">
+                  <div class="addon-card-inner">
+                    <div class="addon-icon-wrap">
+                      <div class="spoiler-icon">
+                        <div class="spoiler-wing"></div>
+                        <div class="spoiler-support left"></div>
+                        <div class="spoiler-support right"></div>
+                      </div>
+                    </div>
+                    <div class="addon-text">
+                      <span class="addon-name">جناح خلفي كربوني</span>
+                      <span class="addon-desc">+ $4,500</span>
+                    </div>
+                    <div class="addon-check">✓</div>
+                  </div>
+                </label>
+                <label class="addon-card" id="addon-sound-label">
+                  <input type="checkbox" id="toggle-sound" data-sound-price="2500">
+                  <div class="addon-card-inner">
+                    <div class="addon-icon-wrap">
+                      <div class="sound-icon">
+                        <div class="sound-wave w1"></div>
+                        <div class="sound-wave w2"></div>
+                        <div class="sound-wave w3"></div>
+                      </div>
+                    </div>
+                    <div class="addon-text">
+                      <span class="addon-name">صوت Burmester 3D</span>
+                      <span class="addon-desc">+ $2,500</span>
+                    </div>
+                    <div class="addon-check">✓</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Config Summary / Actions -->
+            <div class="config-summary">
+              <div class="total-price-row">
+                <span>السعر المقدر للسيارة:</span>
+                <span class="price-val" id="config-total-price">$150,000</span>
+              </div>
+              <button id="book-test-drive-btn" class="btn btn-primary btn-block">احجز تجربة قيادة بمواصفاتك</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Shop Section (Porsche Boutique) -->
+      <section id="shop" class="section-padding container">
+        <div class="section-title reveal">
+          <h2>بوتيك بورش لايف ستايل</h2>
+          <p>احمل التميز الرياضي والأناقة الخالدة معك في كل تفاصيل يومك</p>
+        </div>
+
+        <div class="shop-grid">
+          <!-- Item 1 -->
+          <div class="shop-card reveal" data-id="p1" data-name="ساعة كرونوغراف بورش ديزاين 1" data-price="6450"
+            data-img="/assets/porsche_watch.png">
+            <div class="card-badge">الأكثر طلباً</div>
+            <div class="product-gallery">
+              <div class="product-img watch-bg-preview">
+                <div class="porsche-badge-logo"></div>
+                <div class="watch-dial-mockup">
+                  <div class="hand hour"></div>
+                  <div class="hand minute"></div>
+                  <span class="brand-sub">CHRONOGRAPH</span>
+                </div>
+              </div>
+            </div>
+            <div class="shop-card-info">
+              <h3>ساعة كرونوغراف بورش ديزاين 1</h3>
+              <p>مستوحاة من لوحة قيادة سيارة 911 الأسطورية بجسم تيتانيوم أسود مقاوم للخدش وهيكل مميز.</p>
+              <div class="shop-price-row">
+                <span class="product-price">$6,450</span>
+                <button class="btn-shop add-to-cart-btn">أضف للسلة</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="shop-card reveal" data-id="p2" data-name="حقيبة سفر جلدية راقية" data-price="480"
+            data-img="/assets/porsche_bag.png">
+            <div class="product-gallery">
+              <div class="product-img bag-bg-preview">
+                <div class="bag-handle"></div>
+                <div class="bag-body">
+                  <div class="bag-stitching"></div>
+                  <span class="embossed-logo">PORSCHE</span>
+                </div>
+              </div>
+            </div>
+            <div class="shop-card-info">
+              <h3>حقيبة سفر جلدية راقية</h3>
+              <p>جلد طبيعي أسود فاخر مطرز يدوياً بحرفية ألمانية وشعار بورش الكلاسيكي وتصميم يتسع لكل حاجياتك.</p>
+              <div class="shop-price-row">
+                <span class="product-price">$480</span>
+                <button class="btn-shop add-to-cart-btn">أضف للسلة</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="shop-card reveal" data-id="p3" data-name="سماعات بورش الرياضية ANC" data-price="320"
+            data-img="/assets/porsche_audio.png">
+            <div class="product-gallery">
+              <div class="product-img audio-bg-preview">
+                <div class="earbud left-pod"></div>
+                <div class="earbud right-pod"></div>
+                <div class="case-logo">PORSCHE</div>
+              </div>
+            </div>
+            <div class="shop-card-info">
+              <h3>سماعات بورش الرياضية ANC</h3>
+              <p>تجربة استماع نقية وعزل نشط معزز للضوضاء وتصميم مريح وملاءمة مستقرة عند ممارسة الرياضة.</p>
+              <div class="shop-price-row">
+                <span class="product-price">$320</span>
+                <button class="btn-shop add-to-cart-btn">أضف للسلة</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="shop-card reveal" data-id="p4" data-name="مجسم بورش تايكان 1:18" data-price="150"
+            data-img="/assets/porsche_model.png">
+            <div class="product-gallery">
+              <div class="product-img model-bg-preview">
+                <div class="mini-car-silhouette"></div>
+                <span class="scale-tag">1:18 SCALE</span>
+              </div>
+            </div>
+            <div class="shop-card-info">
+              <h3>مجسم بورش تايكان 1:18</h3>
+              <p>نسخة مصغّرة طبق الأصل بالتفاصيل الداخلية والخارجية الرائعة للسيارة الكهربائية، لهواة الجمع الفائقين.
+              </p>
+              <div class="shop-price-row">
+                <span class="product-price">$150</span>
+                <button class="btn-shop add-to-cart-btn">أضف للسلة</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="shop-card reveal" data-id="p5" data-name="قبعة بورش الكلاسيكية Heritage" data-price="60"
+            data-img="/assets/porsche_cap.png">
+            <div class="product-gallery">
+              <div class="product-img cap-bg-preview">
+                <div class="cap-visor"></div>
+                <div class="cap-crest"></div>
+              </div>
+            </div>
+            <div class="shop-card-info">
+              <h3>قبعة بورش الكلاسيكية Heritage</h3>
+              <p>مصنوعة من القطن العضوي المتين مع قفل معدني أنيق وشعار بورش الملون المطرز بدقة عالية.</p>
+              <div class="shop-price-row">
+                <span class="product-price">$60</span>
+                <button class="btn-shop add-to-cart-btn">أضف للسلة</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="shop-card reveal" data-id="p6" data-name="ميدالية مفاتيح ألياف الكربون" data-price="40"
+            data-img="/assets/porsche_keychain.png">
+            <div class="product-gallery">
+              <div class="product-img keychain-bg-preview">
+                <div class="keychain-loop"></div>
+                <div class="keychain-body">
+                  <div class="carbon-weave"></div>
+                  <span class="keychain-engraved">PORSCHE</span>
+                </div>
+              </div>
+            </div>
+            <div class="shop-card-info">
+              <h3>ميدالية مفاتيح ألياف الكربون</h3>
+              <p>حلقة من الستانلس ستيل القوي مثبتة بقطعة من ألياف الكربون الأصلية خفيفة الوزن محفورة بشعار بورش.</p>
+              <div class="shop-price-row">
+                <span class="product-price">$40</span>
+                <button class="btn-shop add-to-cart-btn">أضف للسلة</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Floating Cart Trigger -->
+    <button id="floating-cart-btn" class="floating-cart-fab glass">
+      <span class="cart-icon-svg">🛍️</span>
+      <span class="cart-badge-count" id="cart-floating-badge">0</span>
+    </button>
+
+    <!-- Shopping Cart Drawer -->
+    <div id="cart-drawer" class="cart-drawer-overlay">
+      <div class="cart-drawer glass animate-slide-left">
+        <div class="cart-header">
+          <h3>سلة المشتريات (<span id="cart-count">0</span>)</h3>
+          <button id="close-cart-btn" class="close-btn">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+          <div class="empty-cart-message">
+            <p>سلتك فارغة حالياً. تصفح سلع بوتيك بورش الرائعة وأضف لطلبك.</p>
+          </div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total-row">
+            <span>المجموع الفرعي:</span>
+            <span id="cart-subtotal">$0</span>
+          </div>
+          <button id="checkout-btn" class="btn btn-primary btn-block" disabled>الذهاب لإتمام الشراء</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal-overlay">
+      <div class="modal-content glass animate-fade-in">
+        <button class="close-modal-btn" id="close-checkout-btn">&times;</button>
+        <div class="modal-layout">
+          <!-- Checkout Form -->
+          <div class="checkout-form-panel">
+            <h2>إتمام الشراء والدفع</h2>
+            <form id="pay-form">
+              <div class="form-group">
+                <label>الاسم الكامل</label>
+                <input type="text" id="ship-name" required placeholder="محمد علي اليماني">
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>المدينة</label>
+                  <select id="ship-city">
+                    <option value="صنعاء">صنعاء</option>
+                    <option value="عدن">عدن</option>
+                    <option value="تعز">تعز</option>
+                    <option value="حضرموت">حضرموت</option>
+                    <option value="الحديدة">الحديدة</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>رقم الهاتف</label>
+                  <input type="tel" id="ship-phone" required placeholder="777XXXXXX">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>العنوان بالتفصيل</label>
+                <input type="text" id="ship-address" required placeholder="شارع الستين، بجانب مركز صيانة بورش">
+              </div>
+
+              <!-- Payment Method Fields -->
+              <div class="payment-method-selectors">
+                <label class="radio-tab active" id="tab-card">
+                  <input type="radio" name="payment-method" value="card" checked>
+                  بطاقة ائتمانية
+                </label>
+                <label class="radio-tab" id="tab-cod">
+                  <input type="radio" name="payment-method" value="cod">
+                  الدفع/الاستلام من صالة العرض
+                </label>
+              </div>
+
+              <div id="credit-card-fields">
+                <div class="form-group">
+                  <label>رقم البطاقة</label>
+                  <input type="text" class="card-num-input" id="card-num" placeholder="4000 1234 5678 9010"
+                    maxlength="19">
+                </div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>تاريخ الانتهاء</label>
+                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5">
+                  </div>
+                  <div class="form-group">
+                    <label>رمز الأمان CVV</label>
+                    <input type="password" id="card-cvv" placeholder="•••" maxlength="3">
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block" id="pay-submit-btn">تأكيد الطلب ودفع $0</button>
+            </form>
+          </div>
+
+          <!-- Credit Card Graphic -->
+          <div class="checkout-card-preview">
+            <div class="interactive-card" id="visual-card">
+              <div class="card-front">
+                <div class="card-logo">PORSCHE BRANDED VISA</div>
+                <div class="card-chip"></div>
+                <div class="card-num-display">•••• •••• •••• ••••</div>
+                <div class="card-details-row">
+                  <div class="card-holder-display">اسم صاحب البطاقة</div>
+                  <div class="card-expiry-display">MM/YY</div>
+                </div>
+              </div>
+              <div class="card-back">
+                <div class="magnetic-strip"></div>
+                <div class="cvv-display">•••</div>
+              </div>
+            </div>
+
+            <div class="order-summary-box">
+              <h3>ملخص المشتريات</h3>
+              <div id="checkout-items-list" class="checkout-items-list">
+                <!-- Dynamically populated -->
+              </div>
+              <hr>
+              <div class="subtotal-row">
+                <span>المجموع الكلي:</span>
+                <strong id="checkout-total-price">$0</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Drive Modal -->
+    <div id="testdrive-modal" class="modal-overlay">
+      <div class="modal-content testdrive-modal-content glass animate-fade-in">
+        <button class="close-modal-btn" id="close-testdrive-btn">&times;</button>
+        <div class="testdrive-steps-container">
+          <h2>حجز تجربة قيادة بورش</h2>
+          <p>أنت على بعد خطوات من ملامسة المقود والروح الفائقة</p>
+
+          <form id="testdrive-form">
+            <div class="form-group">
+              <label>الموديل المختار والمواصفات</label>
+              <input type="text" id="td-model-selected" readonly class="readonly-input">
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>صالة العرض المفضلة</label>
+                <select id="td-showroom" required>
+                  <option value="صنعاء - شارع الستين الغربي (العاصمة)">صنعاء - شارع الستين الغربي (العاصمة)</option>
+                  <option value="عدن - المعلا، صالة عرض بورش الحصرية">عدن - المعلا، صالة عرض بورش الحصرية</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>تفضيل نمط القيادة</label>
+                <select id="td-mode">
+                  <option value="رياضي (Sport Mode)">نمط الأداء الرياضي (Sport Mode)</option>
+                  <option value="كهربائي صامت (E-Performance)">كهربائي صامت (E-Performance)</option>
+                  <option value="مريح (Comfort Mode)">مريح وناعم بالقيادة (Comfort Mode)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>تاريخ تجربة القيادة</label>
+                <input type="date" id="td-date" required>
+              </div>
+              <div class="form-group">
+                <label>الوقت المفضل</label>
+                <select id="td-time" required>
+                  <option value="10:00 صباحاً - 12:00 ظهراً">10:00 صباحاً - 12:00 ظهراً</option>
+                  <option value="02:00 ظهراً - 04:00 عصراً">02:00 ظهراً - 04:00 عصراً</option>
+                  <option value="05:00 عصراً - 07:00 مساءً">05:00 عصراً - 07:00 مساءً</option>
+                </select>
+              </div>
+            </div>
+
+            <hr class="form-spacer">
+
+            <div class="form-group">
+              <label>الاسم الكامل</label>
+              <input type="text" id="td-name" required placeholder="محمد علي اليماني">
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>رقم الجوال الفعال</label>
+                <input type="tel" id="td-phone" required placeholder="777XXXXXX">
+              </div>
+              <div class="form-group">
+                <label>البريد الإلكتروني</label>
+                <input type="email" id="td-email" required placeholder="name@domain.com">
+              </div>
+            </div>
+
+            <div class="form-group checkbox-wrapper">
+              <label class="checkbox-container">
+                <input type="checkbox" required>
+                <span class="checkmark"></span>
+                أقر بأن لدي رخصة قيادة يمنية سارية المفعول وأوافق على شروط وأحكام تجارب بورش الفخمة للسيارات.
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">تأكيد حجز الموعد الفاخر</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- General Success Modal -->
+    <div id="success-modal" class="modal-overlay">
+      <div class="modal-content success-card glass text-center animate-scale-up">
+        <button class="close-modal-btn" id="close-success-btn">&times;</button>
+        <div class="success-icon-wrap">
+          <div class="success-check-icon">✓</div>
+        </div>
+        <h2 id="success-title">تمت العملية بنجاح!</h2>
+        <p id="success-message">شكراً لثقتكم ببورش اليمن. لقد تلقينا طلبكم بنجاح.</p>
+
+        <div id="ticket-container" class="ticket-container hide">
+          <div class="badge-ticket">تذكرة تجربة بورش الحصرية</div>
+          <div class="ticket-detail">
+            <span>الرمز المرجعي:</span> <strong id="t-ref">PR911-307</strong>
+          </div>
+          <div class="ticket-detail">
+            <span>العميل:</span> <strong id="t-name">محمد علي</strong>
+          </div>
+          <div class="ticket-detail">
+            <span>السيارة المخصصة:</span> <strong id="t-car">Porsche Taycan</strong>
+          </div>
+          <div class="ticket-detail">
+            <span>الفرع:</span> <strong id="t-branch">صنعاء</strong>
+          </div>
+          <div class="ticket-detail">
+            <span>الموعد:</span> <strong id="t-datetime">2026-08-01 في 10:00 ص</strong>
+          </div>
+          <!-- Clean mock QR code -->
+          <div class="mock-qr-code">
+            <div class="qr-box">
+              <div class="qr-corner top-left"></div>
+              <div class="qr-corner top-right"></div>
+              <div class="qr-corner bottom-left"></div>
+              <div class="qr-corner bottom-right"></div>
+              <div class="qr-dots-pattern"></div>
+            </div>
+            <p>امسح الكود لتنزيل التذكرة على هاتفك</p>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="success-done-btn">العودة للرئيسية</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>الطرازات</h4>
+            <ul>
+              <li><a href="#">911</a></li>
+              <li><a href="#">718</a></li>
+              <li><a href="#">تايكان</a></li>
+              <li><a href="#">باناميرا</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>الخدمات</h4>
+            <ul>
+              <li><a href="#">احجز موعد صيانة</a></li>
+              <li><a href="#">قطع غيار أصلية</a></li>
+              <li><a href="#">برامج الضمان</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>الشركة</h4>
+            <ul>
+              <li><a href="#">عن بورش</a></li>
+              <li><a href="#">الاستدامة</a></li>
+              <li><a href="#">الوظائف</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="logo">
+              <img src="/assets/logo.png" alt="بورش">
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 بورش اليمن. جميع الحقوق محفوظة.</p>
+          <div class="social-links">
+            <a href="#">تويتر</a> | <a href="#">إنستقرام</a> | <a href="#">فيسبوك</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
