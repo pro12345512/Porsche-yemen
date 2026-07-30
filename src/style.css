@@ -2676,3 +2676,33 @@ body:has(.cart-drawer-overlay.open) #floating-cart-btn {
   .section-title h2 { font-size: 1.8rem; }
   .section-title p { font-size: 0.9rem; }
 }
+
+/* WhatsApp Premium Button Styling */
+.btn-whatsapp {
+  background: var(--black);
+  color: #25D366 !important;
+  border: 2px solid #25D366 !important;
+  font-weight: 700;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btn-whatsapp:hover {
+  background: #25D366 !important;
+  color: var(--white) !important;
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+  border-color: #25D366 !important;
+}
+
+.btn-whatsapp:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--gray-mid) !important;
+  color: var(--gray-mid) !important;
+  background: var(--black) !important;
+  box-shadow: none !important;
+}

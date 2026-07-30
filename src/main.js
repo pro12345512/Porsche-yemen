@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initConfigurator();
   initCartAndShop();
   initModals();
-  initCreditCardVisuals();
 });
 
 // Mobile Navigation Toggle
@@ -271,10 +270,21 @@ function initCartAndShop() {
     });
   });
 
-  // Checkout trigger
+  // Checkout trigger (WhatsApp Redirect)
   checkoutBtn.addEventListener('click', () => {
     cartDrawer.classList.remove('open');
-    openCheckoutModal();
+    
+    // Prepare message
+    let messageText = `مرحباً بورش اليمن، أود طلب المنتجات التالية من بوتيك بورش لايف ستايل:\n\n`;
+    let subtotal = 0;
+    cart.forEach((item, index) => {
+      subtotal += item.price * item.quantity;
+      messageText += `${index + 1}. *${item.name}*\n   العدد: ${item.quantity} | السعر: $${(item.price * item.quantity).toLocaleString()}\n`;
+    });
+    messageText += `\n*المجموع الإجمالي الفرعي:* $${subtotal.toLocaleString()}\n\nالرجاء تأكيد الطلب وتجهيز المنتجات للاستلام.`;
+    
+    const whatsappUrl = `https://wa.me/967770471086?text=${encodeURIComponent(messageText)}`;
+    window.open(whatsappUrl, '_blank');
   });
 }
 
@@ -384,10 +394,6 @@ function initModals() {
   const closeTestdriveBtn = document.getElementById('close-testdrive-btn');
   const testDriveForm = document.getElementById('testdrive-form');
 
-  const checkoutModal = document.getElementById('checkout-modal');
-  const closeCheckoutBtn = document.getElementById('close-checkout-btn');
-  const payForm = document.getElementById('pay-form');
-
   const successModal = document.getElementById('success-modal');
   const closeSuccessBtn = document.getElementById('close-success-btn');
   const successDoneBtn = document.getElementById('success-done-btn');
@@ -410,11 +416,6 @@ function initModals() {
     testDriveModal.classList.remove('open');
   });
 
-  // Checkout close
-  closeCheckoutBtn.addEventListener('click', () => {
-    checkoutModal.classList.remove('open');
-  });
-
   // Success closed
   closeSuccessBtn.addEventListener('click', () => {
     successModal.classList.remove('open');
@@ -424,7 +425,7 @@ function initModals() {
   });
 
   // Close modals when clicking overlay
-  const modals = [testDriveModal, checkoutModal, successModal];
+  const modals = [testDriveModal, successModal];
   modals.forEach(modal => {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
@@ -464,141 +465,6 @@ function initModals() {
 
     // Reset Form
     testDriveForm.reset();
-  });
-
-  // Checkout Payment Form Submission
-  payForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const nameVal = document.getElementById('ship-name').value;
-    const totalSpent = document.getElementById('checkout-total-price').innerText;
-
-    // Update success title & content
-    document.getElementById('success-title').innerText = 'شكراً لك، تم إرسال طلبك!';
-    document.getElementById('success-message').innerText = `أهلاً بك يا ${nameVal}، لقد تم إتمام معاملتكم بنجاح بمجموع ${totalSpent}. سنقوم بالتواصل معك لتنسيق تسليم مقتنياتك الفخمة من بوتيك بورش اليمن في أقرب فرصة.`;
-    document.getElementById('ticket-container').classList.add('hide');
-
-    // Close form modal, open success modal
-    checkoutModal.classList.remove('open');
-    successModal.classList.add('open');
-
-    // Empty Cart
-    cart = [];
-    updateCartUI();
-    payForm.reset();
-  });
-
-  // Toggle Payment Methods (Card vs cash/cod)
-  const isCardRadio = document.getElementsByName('payment-method');
-  const cardFields = document.getElementById('credit-card-fields');
-  const tabCard = document.getElementById('tab-card');
-  const tabCod = document.getElementById('tab-cod');
-
-  isCardRadio.forEach(radio => {
-    radio.addEventListener('change', (e) => {
-      if (e.target.value === 'card') {
-        cardFields.style.display = 'block';
-        tabCard.classList.add('active');
-        tabCod.classList.remove('active');
-        document.getElementById('pay-submit-btn').innerText = `تأكيد الطلب ودفع ${document.getElementById('checkout-total-price').innerText}`;
-      } else {
-        cardFields.style.display = 'none';
-        tabCard.classList.remove('active');
-        tabCod.classList.add('active');
-        document.getElementById('pay-submit-btn').innerText = `تأكيد الطلب والدفع عند الاستلام`;
-      }
-    });
-  });
-}
-
-function openCheckoutModal() {
-  const checkoutModal = document.getElementById('checkout-modal');
-  checkoutModal.classList.add('open');
-
-  let subtotal = 0;
-  const itemsContainer = document.getElementById('checkout-items-list');
-  itemsContainer.innerHTML = '';
-
-  cart.forEach(item => {
-    subtotal += item.price * item.quantity;
-
-    // Add to modal list view
-    const row = document.createElement('div');
-    row.className = 'summary-item-row';
-    row.innerHTML = `
-      <span>${item.name} (x${item.quantity})</span>
-      <span>$${(item.price * item.quantity).toLocaleString()}</span>
-    `;
-    itemsContainer.appendChild(row);
-  });
-
-  const displayTotal = `$${subtotal.toLocaleString()}`;
-  document.getElementById('checkout-total-price').innerText = displayTotal;
-
-  const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
-  if (paymentMethod === 'card') {
-    document.getElementById('pay-submit-btn').innerText = `تأكيد الطلب ودفع ${displayTotal}`;
-  } else {
-    document.getElementById('pay-submit-btn').innerText = `تأكيد الطلب والدفع عند الاستلام`;
-  }
-}
-
-// --- INTERACTIVE CREDIT CARD VISUALS LOGIC ---
-function initCreditCardVisuals() {
-  const numInput = document.getElementById('card-num');
-  const nameInput = document.getElementById('ship-name');
-  const expInput = document.getElementById('card-expiry');
-  const cvvInput = document.getElementById('card-cvv');
-  const visualCard = document.getElementById('visual-card');
-
-  const vNum = document.querySelector('.card-num-display');
-  const vName = document.querySelector('.card-holder-display');
-  const vExp = document.querySelector('.card-expiry-display');
-  const vCvv = document.querySelector('.cvv-display');
-
-  // Input Formatting & Binding
-  numInput.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    let formatted = '';
-    for (let i = 0; i < value.length; i++) {
-      if (i > 0 && i % 4 === 0) {
-        formatted += ' ';
-      }
-      formatted += value[i];
-    }
-    e.target.value = formatted;
-    vNum.innerText = formatted.length > 0 ? formatted : '•••• •••• •••• ••••';
-  });
-
-  // Name updates
-  nameInput.addEventListener('input', (e) => {
-    vName.innerText = e.target.value.length > 0 ? e.target.value.toUpperCase() : 'اسم صاحب البطاقة';
-  });
-
-  // Expiry MM/YY formatting
-  expInput.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    if (value.length > 2) {
-      value = value.substring(0, 2) + '/' + value.substring(2, 4);
-    }
-    e.target.value = value;
-    vExp.innerText = value.length > 0 ? value : 'MM/YY';
-  });
-
-  // CVV binding
-  cvvInput.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/\D/g, '');
-    e.target.value = value;
-    vCvv.innerText = value.length > 0 ? value : '•••';
-  });
-
-  // Flip Actions
-  cvvInput.addEventListener('focus', () => {
-    visualCard.classList.add('flipped');
-  });
-
-  cvvInput.addEventListener('blur', () => {
-    visualCard.classList.remove('flipped');
   });
 }
 
