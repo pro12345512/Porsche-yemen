@@ -18,6 +18,22 @@
   box-sizing: border-box;
 }
 
+/* Custom slim scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 body {
   font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
   background-color: var(--black);
@@ -112,6 +128,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
 
 .logo img {
@@ -135,6 +152,40 @@ nav {
 .nav-links a:hover {
   opacity: 1;
   color: var(--porsche-red);
+}
+
+/* Hamburger Mobile Toggle Button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1100;
+}
+
+.nav-toggle span {
+  width: 100%;
+  height: 2px;
+  background-color: var(--white);
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -221,7 +272,7 @@ nav {
 /* Models Showcase */
 .models-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
   gap: 2rem;
   margin-top: 4rem;
 }
@@ -706,7 +757,7 @@ footer {
 /* --- BOUTIQUE SHOP STYLING --- */
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   gap: 2.5rem;
   margin-top: 4rem;
 }
@@ -1905,6 +1956,37 @@ footer {
   }
 }
 
+/* Navigation Backdrop Overlay (Mobile Menu) */
+.nav-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1040;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-backdrop.active {
+  opacity: 1;
+}
+
+@media (max-width: 992px) {
+  .nav-backdrop {
+    display: block;
+    pointer-events: none;
+  }
+
+  .nav-backdrop.active {
+    pointer-events: all;
+  }
+}
+
 /* Responsive Media Queries */
 @media (max-width: 1100px) {
   .modal-layout {
@@ -1923,8 +2005,42 @@ footer {
     font-size: 3.5rem;
   }
 
-  .nav-links {
+  .nav-toggle {
+    display: flex;
+  }
+
+  /* Hide contact button on mobile to keep header clean */
+  .nav-cta {
     display: none;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 400px;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    z-index: 1050;
+    border-left: 1px solid var(--glass-border);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links a {
+    font-size: 1.4rem;
+    opacity: 0.8;
   }
 
   .footer-grid {
@@ -1933,6 +2049,20 @@ footer {
 
   .feature-item {
     flex-direction: column !important;
+    gap: 2.5rem;
+  }
+
+  .feature-img {
+    height: 350px !important;
+    width: 100%;
+  }
+
+  .feature-text {
+    text-align: center;
+  }
+
+  .feature-text h2 {
+    font-size: 2.2rem;
   }
 
   .configurator-wrapper {
@@ -1950,27 +2080,51 @@ footer {
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 0 1.2rem;
+  }
+
+  .section-padding {
+    padding: 4.5rem 0;
+  }
+
   .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: 2.6rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
   .specs-hud {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem;
+    padding: 1.2rem 0.5rem;
     position: static;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    width: 100%;
     background: rgba(10, 10, 10, 0.85);
+    border-radius: 8px;
+  }
+
+  .spec-val {
+    font-size: 1.1rem !important;
+  }
+
+  .spec-lbl {
+    font-size: 0.65rem !important;
   }
 
   .config-preview {
     height: auto;
     flex-direction: column;
-    padding: 2rem 1rem;
+    padding: 2rem 1.2rem;
   }
 
   .car-image-container {
@@ -2000,6 +2154,62 @@ footer {
   .payment-method-selectors {
     flex-direction: column;
   }
+
+  .close-modal-btn {
+    position: sticky;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    float: left;
+    margin-bottom: -40px;
+  }
+
+  #credit-card-fields input {
+    direction: ltr !important;
+    text-align: left !important;
+  }
+
+  #credit-card-fields input::placeholder {
+    text-align: left !important;
+  }
+
+  .interactive-card {
+    height: 180px;
+  }
+
+  .card-front, .card-back {
+    padding: 1.2rem;
+  }
+
+  .card-num-display {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+  }
+
+  .card-logo {
+    font-size: 0.8rem;
+  }
+
+  .card-chip {
+    width: 35px;
+    height: 25px;
+  }
+
+  .card-holder-display {
+    font-size: 0.72rem;
+  }
+
+  .card-expiry-display {
+    font-size: 0.8rem;
+  }
+}
+
+/* Has-selector to prevent floating button overlay */
+body:has(.modal-overlay.open) #floating-cart-btn,
+body:has(.cart-drawer-overlay.open) #floating-cart-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: scale(0.8) !important;
 }
 
 /* ============================================
@@ -2429,9 +2639,40 @@ footer {
 
 @media (max-width: 900px) {
   .color-gallery-grid { grid-template-columns: 1fr 1fr; }
-  .wheels-select-visual { grid-template-columns: 1fr; }
+  .wheels-select-visual { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 600px) {
   .color-gallery-grid { grid-template-columns: 1fr; }
+  .wheels-select-visual { grid-template-columns: repeat(3, 1fr); }
+  .wheel-option-card { padding: 0.6rem 0.4rem; }
+  .wheel-rim { width: 52px; height: 52px; border-width: 4px; }
+  .wheel-center { width: 15px; height: 15px; }
+  .wheel-visual-preview { height: 62px; }
+  .wheel-name { font-size: 0.68rem; }
+  .wheel-size, .wheel-price-tag { font-size: 0.62rem; }
+
+  /* Wider section padding for boutique */
+  .shop-card-info { padding: 1.2rem; }
+  .shop-card-info h3 { font-size: 1.05rem; }
+
+  /* Configurator controls spacing */
+  .config-controls { padding: 1.5rem 1.2rem; }
+  .config-controls h3 { font-size: 1.3rem; }
+  .model-btn { font-size: 0.85rem; padding: 0.85rem 1rem; }
+
+  /* Addons on small mobile */
+  .addon-card-inner { padding: 0.8rem 0.9rem; gap: 0.8rem; }
+  .addon-name { font-size: 0.82rem; }
+  .addon-desc { font-size: 0.7rem; }
+
+  /* Footer */
+  .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+
+  /* Hero */
+  .hero-btns .btn { padding: 1rem 2rem; font-size: 0.85rem; }
+
+  /* Section titles */
+  .section-title h2 { font-size: 1.8rem; }
+  .section-title p { font-size: 0.9rem; }
 }

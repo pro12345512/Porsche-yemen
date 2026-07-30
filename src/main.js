@@ -4,10 +4,6 @@ import './style.css'
 const configState = {
   model: 'taycan',
   basePrice: 150000,
-  colorHex: '#D5001C',
-  colorName: 'Guards Red (أحمر بورش للسباقات)',
-  wheelPrice: 0,
-  wheelStyle: 'classic',
   headlights: false,
   spoiler: false,
   spoilerPrice: 4500,
@@ -74,21 +70,63 @@ document.addEventListener('DOMContentLoaded', () => {
   reveals.forEach(el => revealObserver.observe(el));
 
   // Initialize Configurator preview color
-  updateConfiguratorColor(configState.colorHex);
+  updateConfiguratorColor('#D5001C');
   calculateConfigPrice();
 
   // Bind Event Listeners
+  initMobileNav();
   initConfigurator();
   initCartAndShop();
   initModals();
   initCreditCardVisuals();
 });
 
+// Mobile Navigation Toggle
+function initMobileNav() {
+  const toggleBtn = document.getElementById('nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const links = document.querySelectorAll('.nav-links a');
+
+  // Create a backdrop overlay for closing menu by outside click
+  const backdrop = document.createElement('div');
+  backdrop.className = 'nav-backdrop';
+  document.body.appendChild(backdrop);
+
+  function openMenu() {
+    toggleBtn.classList.add('active');
+    navLinks.classList.add('active');
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    toggleBtn.classList.remove('active');
+    navLinks.classList.remove('active');
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (toggleBtn && navLinks) {
+    toggleBtn.addEventListener('click', () => {
+      if (toggleBtn.classList.contains('active')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    links.forEach(link => {
+      link.addEventListener('click', () => closeMenu());
+    });
+
+    backdrop.addEventListener('click', () => closeMenu());
+  }
+}
+
 // --- PORSCHE CONFIGURATOR LOGIC ---
 
 function initConfigurator() {
   const modelBtns = document.querySelectorAll('.model-btn');
-  const wheelOptionCards = document.querySelectorAll('.wheel-option-card');
   const toggleHeadlights = document.getElementById('toggle-headlights');
   const toggleSpoiler = document.getElementById('toggle-spoiler');
   const toggleSound = document.getElementById('toggle-sound');
@@ -117,58 +155,31 @@ function initConfigurator() {
     });
   });
 
-  // Visual Wheel Cards
-  wheelOptionCards.forEach(card => {
-    card.addEventListener('click', () => {
-      wheelOptionCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-
-      configState.wheelStyle = card.dataset.wheelStyle;
-      configState.wheelPrice = parseFloat(card.dataset.wheelPrice);
-
-      // Update wheel rim color tint
-      document.querySelectorAll('.wheel-rim').forEach(rim => {
-        rim.style.borderColor = configState.colorHex;
-      });
-
-      calculateConfigPrice();
-    });
-  });
-
-  // Addon Cards - Headlights DRL
+  // Addon Cards - Headlights DRL (UI toggle only, no image overlay)
   const addonHeadlightsLabel = document.getElementById('addon-headlights-label');
   if (toggleHeadlights) {
     toggleHeadlights.addEventListener('change', (e) => {
       configState.headlights = e.target.checked;
-      const leftGl = document.querySelector('.left-headlight');
-      const rightGl = document.querySelector('.right-headlight');
       const drlBars = document.querySelectorAll('.drl-bar');
 
       if (configState.headlights) {
-        leftGl.classList.add('glow-active');
-        rightGl.classList.add('glow-active');
         addonHeadlightsLabel && addonHeadlightsLabel.classList.add('addon-active');
         drlBars.forEach(bar => bar.classList.add('drl-on'));
       } else {
-        leftGl.classList.remove('glow-active');
-        rightGl.classList.remove('glow-active');
         addonHeadlightsLabel && addonHeadlightsLabel.classList.remove('addon-active');
         drlBars.forEach(bar => bar.classList.remove('drl-on'));
       }
     });
   }
 
-  // Addon Cards - Spoiler
+  // Addon Cards - Spoiler (UI toggle only, no image overlay)
   const addonSpoilerLabel = document.getElementById('addon-spoiler-label');
   if (toggleSpoiler) {
     toggleSpoiler.addEventListener('change', (e) => {
       configState.spoiler = e.target.checked;
-      const spoilerOverlay = document.getElementById('spoiler-overlay');
       if (configState.spoiler) {
-        spoilerOverlay.classList.remove('hide');
         addonSpoilerLabel && addonSpoilerLabel.classList.add('addon-active');
       } else {
-        spoilerOverlay.classList.add('hide');
         addonSpoilerLabel && addonSpoilerLabel.classList.remove('addon-active');
       }
       calculateConfigPrice();
@@ -188,11 +199,6 @@ function initConfigurator() {
       calculateConfigPrice();
     });
   }
-
-  // Init wheel rim tint
-  document.querySelectorAll('.wheel-rim').forEach(rim => {
-    rim.style.borderColor = configState.colorHex;
-  });
 }
 
 // Configurator Helpers
@@ -202,31 +208,12 @@ function updateConfiguratorColor(hex) {
   if (customAura) {
     customAura.style.background = `radial-gradient(circle, ${hex}55 0%, transparent 70%)`;
   }
-  // Update wheel rims tint color
-  document.querySelectorAll('.wheel-rim').forEach(rim => {
-    rim.style.borderColor = hex;
-  });
-  document.querySelectorAll('.wheel-center').forEach(c => {
-    c.style.background = hex;
-  });
-  // Update spoiler overlay color
-  const spoilerOverlay = document.getElementById('spoiler-overlay');
-  if (spoilerOverlay) {
-    spoilerOverlay.style.setProperty('--spoiler-color', hex);
-  }
-  // Update DRL glow color
-  document.querySelectorAll('.drl-bar').forEach(bar => {
-    bar.style.boxShadow = `0 0 8px 2px ${hex}cc`;
-  });
-  document.querySelectorAll('.left-headlight, .right-headlight').forEach(hl => {
-    hl.style.setProperty('--hl-color', hex);
-  });
 }
 
 
 
 function calculateConfigPrice() {
-  let total = configState.basePrice + configState.wheelPrice;
+  let total = configState.basePrice;
   if (configState.spoiler) total += configState.spoilerPrice;
   if (configState.sound) total += configState.soundPrice;
   configState.totalPrice = total;
